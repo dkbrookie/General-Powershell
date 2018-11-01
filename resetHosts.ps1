@@ -1,3 +1,14 @@
+<#
+.SYNOPSIS
+Reset the Hosts file at $env:windir\System32\drivers\etc\hosts to default values.DESCRIPTION
+
+.DESCRIPTION
+This script will make a copy of your current hosts file, then overwrite it with the default
+values from a clean install of Windows. Of the script finds there is already a backup created,
+it will continue on without creating a new backup so it doesn't overwrite the orig backup. The
+backup is saved to $env:windir\LTsvc\hosts.bak.
+#>
+
 $hosts = "$env:windir\System32\drivers\etc\hosts"
 $hostsBackup = "$env:windir\LTsvc\hosts.bak"
 
