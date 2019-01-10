@@ -5,7 +5,7 @@ Try {
   $hostsContent = Get-Content $hosts
   $rowCount = $hostsContent.Count
 
-  If($rowCount -gt 21) {
+  If($rowCount -ne 21) {
     Write-Host "Hosts file has been altered!"
     If(!(Test-Path $hostsBackup)) {
       Copy-Item $hosts -Destination $hostsBackup
