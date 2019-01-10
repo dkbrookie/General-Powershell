@@ -13,6 +13,10 @@ Try {
     } Else {
       Write-Output "Verified there is already a backup of the hosts file at $hostsBackup"
     }
+    Write-Host "-----------------------------------"
+    Write-Host "------Hosts file output below------"
+    Write-Host "-----------------------------------"
+    $hostsContent
   } Else  {
     Write-Host "Default hosts file confirmed"
   }
