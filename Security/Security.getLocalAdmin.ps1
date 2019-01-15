@@ -5,10 +5,18 @@ ForEach($user in $users) {
   $type = $user.ObjectClass
   $name = $user.name
   $source = $user.PrincipalSource
-  If(!$typeOut) {
-    $typeOut = "[Username: $name /// Source: $source /// Type: $type]"
-  } Else {
-    $typeOut = "$typeOut, [Username: $name /// Source: $source /// Type: $type]"
+  If($type -eq 'user') {
+    If(!$userAdmins) {
+      $userAdmins = "[Username: $name /// Source: $source /// Type: $type]"
+    } Else {
+      $userAdmins = "$userAdmins, [Username: $name /// Source: $source /// Type: $type]"
+    }
+  } ElseIf ($type -eq 'group'){
+    If(!$groupAdmins) {
+      $groupAdmins = "[Group: $name /// Source: $source /// Type: $type]"
+    } Else {
+      $groupAdmins = "$userAdmins, [Group: $name /// Source: $source /// Type: $type]"
+    }
   }
 }
-$typeOut
+Write-Output "userAdmins=$userAdmins|groupAdmins=$groupAdmins"
