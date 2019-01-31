@@ -56,3 +56,5 @@ Remove-ItemProperty "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion
 
 ## Sometimes after tghe uninstall the Windows installer gets hung, so force stopping it to make sure the next install is successful
 Stop-Process -Name msiexec -Force -EA 0
+
+Write-Output "Webroot removal script complete"
