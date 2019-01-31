@@ -17,7 +17,10 @@ If($wrUninstall) {
   $wrRemove = ($wrUninstall -Replace "msiexec.exe","" -Replace " /x{","" -Replace "}","").Trim()
   Start-Process -Wait MSIExec.exe -ArgumentList "/x $wrRemove /qn"
   $wrKey = $wrRemove = ($wrUninstall -Replace "msiexec.exe","" -Replace " /x","").Trim()
-  Remove-Item "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\$wrKey" -Force -EA 0
+  Remove-Item "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\$wrKey" -Force -Confirm:$False -EA 0
+  Remove-Item "HKLM:\SOFTWARE\WOW6432Node\webroot" -Force -Confirm:$False -EA 0
+  Remove-Item "HKLM:\SOFTWARE\WOW6432Node\WRData" -Force -Confirm:$False -Recurse -EA 0
+  Remove-Item "HKLM:\SYSTEM\ControlSet001\Services\WRSVC" -Force -Confirm:$False -Recurse -EA 0
 }
 
 
