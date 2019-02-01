@@ -4,10 +4,10 @@ $wrx86 = "$env:SystemDrive\Program Files (x86)\Webroot"
 $wrx64 = "$env:SystemDrive\Program Files\Webroot"
 
 ## Attempt an EXE uninstall
-If((Test-Path $wrx86)) {
+If((Test-Path "$wrx86\wrsa.exe" -PathType Leaf)) {
   Start-Process -Wait "$wrx86\wrsa.exe" -ArgumentList '-uninstall'
 }
-If((Test-Path $wrx64)) {
+If((Test-Path "$wrx64\wrsa.exe" -PathType Leaf)) {
   Start-Process -Wait "$wrx64\wrsa.exe" -ArgumentList '-uninstall'
 }
 
