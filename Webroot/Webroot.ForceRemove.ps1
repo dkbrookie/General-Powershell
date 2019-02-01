@@ -5,10 +5,10 @@ $wrx64 = "$env:SystemDrive\Program Files\Webroot"
 
 ## Attempt an EXE uninstall
 If((Test-Path $wrx86)) {
-  Start-Process -Wait "$wrx86\wrsa.exe" -ArgumentList 'uninstall'
+  Start-Process -Wait "$wrx86\wrsa.exe" -ArgumentList '-uninstall'
 }
 If((Test-Path $wrx64)) {
-  Start-Process -Wait "$wrx64\wrsa.exe" -ArgumentList 'uninstall'
+  Start-Process -Wait "$wrx64\wrsa.exe" -ArgumentList '-uninstall'
 }
 
 
