@@ -45,7 +45,7 @@ If (!$userList) {
             Try {
                 Write-Warning "Removing the user profile for $user..."
                 ## First try to delete the account with the standard powershell built in modules
-                $localUser = Get-LocalUser -Name $user
+                $localUser = Get-LocalUser -Name $user -EA 0
                 If ($localUser) {
                     Remove-LocalUser -Name $user -Confirm:$False
                     ## Note here that the profile was successfully removed so we know to now remove additional files in the next
