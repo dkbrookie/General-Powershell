@@ -37,10 +37,13 @@ If (!$userList) {
                 $localUser = Get-LocalUser -Name $user
                 If ($localUser) {
                     Remove-LocalUser -Name $user -Confirm:$False
+                    $profDelete = $True
                 }
                 $profileDelete = Get-WmiObject Win32_UserProfile -Filter "localpath='$env:SystemDrive\\Users\\$user'"
-                $profileDelete.Delete()
-                $profDelete = $True
+                If ($profileDelete) {
+                    $profileDelete.Delete()
+                    $profDelete = $True
+                }
                 Write-Output "User profile for $user successfully removed"
             } Catch {
                 Write-Warning "Failed to delete the Windows user profile for $user"
