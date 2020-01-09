@@ -33,7 +33,7 @@ If (!$userList) {
         #start deleting
         ForEach ($user in $userList) {
             Try {
-                $profileDelete = Get-WmiObject Win32_UserProfile  -computer ws101 -filter "localpath='$env:SystemDrive\\Users\\$user'"
+                $profileDelete = Get-WmiObject Win32_UserProfile -Filter "localpath='$env:SystemDrive\\Users\\$user'"
                 $profileDelete.Delete()
                 $profDelete = $True
             } Catch {
