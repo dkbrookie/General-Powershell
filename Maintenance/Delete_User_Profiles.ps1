@@ -33,20 +33,20 @@ If (!$userList) {
         #start deleting
         ForEach ($user in $userList) {
             Try {
+                Write-Warning "Removing the user profile for $user..."
                 $profileDelete = Get-WmiObject Win32_UserProfile -Filter "localpath='$env:SystemDrive\\Users\\$user'"
                 $profileDelete.Delete()
                 $profDelete = $True
+                Write-Output "User profile for $user successfully removed"
             } Catch {
                 Write-Warning "Failed to delete the Windows user profile for $user"
                 $profDelete = $False
             }
             $user = "$env:SystemDrive\Users\$user"
-            If (!(Test-Path $user)) {
-                Write-Warning "The folder $user does not exist!"
-            } Else {
+            If ((Test-Path $user)) {
                 Try {
                     If ($profDelete -eq $True) {
-                        Write-Warning "Removing $user..."
+                        Write-Warning "Removing additional directories and files for $user..."
                         Remove-Item $user -Recurse -Force -Confirm:$False
                     }
                 } Catch {
