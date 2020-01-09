@@ -48,19 +48,16 @@ If (!$userList) {
                 $localUser = Get-LocalUser -Name $user -EA 0
                 If ($localUser) {
                     Remove-LocalUser -Name $user -Confirm:$False
-                    ## Note here that the profile was successfully removed so we know to now remove additional files in the next
-                    ## steps if any additional files still exist
-                    $profDelete = $True
                 }
                 ## Just in case the above built in modules failed, try to delete them again with straight WMI
                 $profileDelete = Get-WmiObject Win32_UserProfile -Filter "localpath='$env:SystemDrive\\Users\\$user'"
                 If ($profileDelete) {
                     $profileDelete.Delete()
-                    ## Note here that the profile was successfully removed so we know to now remove additional files in the next
-                    ## steps if any additional files still exist
-                    $profDelete = $True
                 }
                 Write-Output "User profile for $user successfully removed"
+                ## Note here that the profile was successfully removed so we know to now remove additional files in the next
+                ## steps if any additional files still exist
+                $profDelete = $True
             } Catch {
                 Write-Warning "Failed to delete the Windows user profile for $user"
                 ## Note here that the profile removal FAILED so we don't want to just go delete folders for the user in the next
