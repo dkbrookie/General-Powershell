@@ -66,3 +66,5 @@ If (!$userList) {
         Break
     }
 }
+
+Write-Warning 'It is recommended to perform a reboot after removing accounts but is not required'
