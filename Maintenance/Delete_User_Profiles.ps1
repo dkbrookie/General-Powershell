@@ -34,6 +34,10 @@ If (!$userList) {
         ForEach ($user in $userList) {
             Try {
                 Write-Warning "Removing the user profile for $user..."
+                $localUser = Get-LocalUser -Name $user
+                If ($localUser) {
+                    Remove-LocalUser -Name $user -Confirm:$False
+                }
                 $profileDelete = Get-WmiObject Win32_UserProfile -Filter "localpath='$env:SystemDrive\\Users\\$user'"
                 $profileDelete.Delete()
                 $profDelete = $True
